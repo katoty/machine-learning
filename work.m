@@ -1,4 +1,4 @@
-Data=xlsread("C:\Users\lty\Downloads\data.xls");
+Data=xlsread("\data.xls");
 %获取行列数
 row=size(Data,1);
 column=size(Data,2);
