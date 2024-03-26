@@ -1,4 +1,5 @@
 function class = logit(x, xi, yi, xj, yj)
+    %% logit分类器
     %% class 为数据类别 x 为待预测数据取值 i 或 j； xi，xj 为第 i，j 类数据 yi，yj 为对应的类别。
     X = [xi; xj];
     [m, ~] = size(yi);

@@ -1,29 +1,20 @@
-x0 = randi([1, 10], [1, 10])';
-y0 = randi([0, 1], [1, 10])';
-X0 = [x0,y0];
-scatter(x0, y0,'r','filled');
-hold on;
+function class = LDA(x, xi, xj)
+%% LDA分类器
+    ui = mean(xi);  % 计算第一个类别的样本均值向量
+    uj = mean(xj);  % 计算第二个类别的样本均值向量
+    ni = size(xi, 1);  % 第一个类别的样本数
+    nj = size(xj, 1);  % 第二个类别的样本数
+    sw = (ni-1)*cov(xi) + (nj-1)*cov(xj);  % 类内散度矩阵
+    w = sw \ (ui' - uj');  % 计算投影方向
+    uyi = w'*ui';
+    uyj = w'*uj';
+    c = 0.5*(uyi+uyj);
+    h = x*w- c;  % 计算投影后的样本值，这里x应为行向量
+    if h > 0
+        class = true;
+    else
+        class = false;
+    end
+end
 
-x1 = randi([1, 10], [1, 10])';
-y1 = randi([0, 1], [1, 10])';
-X1 = [x1,y1];
-scatter(x1, y1,'y','filled');
 
-% 均值向量
-u0 = mean(X0)';
-u1 = mean(X1)';
-
-% 类内散度矩阵
-Sw = cov(X0) + cov (X1);
-
-% %类间散度矩阵
-% Sb = (u0-u1)*(u0-u1)';
-
-w = Sw \ (u0 - u1);
-
-x = linspace(0, 10, 100);
-y = (-w(1) * x) / w(2); 
-
-% Plot
-plot(x, y);
-hold off;
