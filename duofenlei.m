@@ -1,3 +1,4 @@
+
 clear;clc;
 data = load("Iris.mat");
 Class = data.Class;
@@ -59,15 +60,12 @@ scatter(y2(:,1),y2(:,2),'^')
 y3 = f(x_c3);
 scatter(y3(:,1),y3(:,2),'x')
 
-
-
-
-%% 绘制测试数据的投影
-y_new = x_test*w;
-scatter(y_new( :,1),y_new(:,2),'d');
+% %% 绘制测试数据的投影
+% y_new = x_test*w;
+% scatter(y_new( :,1),y_new(:,2),'d');
 hold off;
 legend('第一类', '第二类', '第三类','测试数据');
-
+title("LDA降维后数据");
 
 %% 利用 lda 中函数进行分类，并给出待预测数据在分类器中类别
 [m,~] = size(x_test);
@@ -90,6 +88,8 @@ for i=1:m
     [max_value, max_index] = max(c);
     arr(i,1) = max_index;
 end
+
+%%  为直观起见，将 1 0 0  ； 0 1 0；0 0 1；记为第1 2 3类
 disp("LDA预测结果")
 disp(arr)
 disp("正确率")
@@ -120,7 +120,7 @@ for i=1:m
     [max_value, max_index] = max(c);
     arr1(i,1) = max_index;
 end
-disp("对数几率回归");
+disp("对数几率回归预测");
 disp(arr1);
 disp("正确率");
 disp(1-err(arr1));
